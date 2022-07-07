@@ -11,7 +11,6 @@ mnist = tf.keras.datasets.mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
-
 # plot 10 example images
 num = 10
 images = x_train[:num]
@@ -58,7 +57,7 @@ print(model.summary())
 # train the model
 model.fit(
     x_train,
-    y_train, 
+    y_train,
     batch_size=batch_size,
     epochs=epochs)
 
@@ -98,7 +97,7 @@ model2 = tf.keras.Sequential(
 model2.summary()
 # compile model
 model2.compile(optimizer="adam",
-               loss="categorical_crossentropy",  
+               loss="categorical_crossentropy",
                metrics=["accuracy"])
 
 model2.fit(x_train_, y_train_, batch_size=batch_size, epochs=epochs)
@@ -189,4 +188,4 @@ for i in range(num_images):
   plt.subplot(num_rows, 2*num_cols, 2*i+2)
   plot_value_array(i, predictions[i], test_labels)
 plt.tight_layout()
-plt.show()
+#plt.show()

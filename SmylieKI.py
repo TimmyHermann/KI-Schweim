@@ -5,13 +5,26 @@ from datetime import datetime
 import random
 import cv2 as cv
 import numpy as np
+from PIL import Image
 
-dataThumbsUpTrain = cv.cvtColor('bild',cv.COLOR_BGR2GRAY)
-dataThumbsUpTest = cv.cvtColor('bild',cv.COLOR_BGR2GRAY)
+# import pathlib
+# dataset_url = 'Tumbs-Up'
+# data_dir = tf.keras.utils.get_file(origin=dataset_url,
+#                                    fname='thumbsUp',
+#                                    untar=True)
+# data_dir = pathlib.Path(data_dir)
+# image_count = len(list(data_dir.glob('*/*.jpg')))
+# print(image_count)
 
+from keras.preprocessing.image import ImageDataGenerator
 
-(xtrain, ytrain) = (dataThumbsUpTrain, "thumbsUp")
-(xtest, ytest) = (dataThumbsUpTest, "thumbsUp")
+train_datagen = ImageDataGenerator(rescale=1./255)
+target_size = (224, 224)
+
+train_generator = train_datagen.flow_from_directory(
+    'Thumbs-Up',
+    target_size=target_size,
+    batch_size=32)
 
 
 dropout_rate = 0.5
@@ -40,11 +53,11 @@ model2.compile(optimizer="adam",
                loss="categorical_crossentropy",
                metrics=["accuracy"])
 
-model2.fit(xtrain, ytrain, batch_size=batch_size, epochs=epochs)
+model2.fit(train_generator, epochs=epochs)
 
 # model evaluation
 print("\nTraining Set: ")
-model2.evaluate(xtrain,  ytrain, verbose=2)
-print("\nTest Set: ")
-model2.evaluate(xtest,  ytest, verbose=2)
+model2.evaluate(train_generator, verbose=2)
+#print("\nTest Set: ")
+#model2.evaluate(xtest,  ytest, verbose=2)
 
