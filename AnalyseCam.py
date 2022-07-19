@@ -71,7 +71,8 @@ while (True):
                 window_array = np.array(wind)
                 window_array = np.expand_dims(window_array, axis=0)
                 print(window_array.shape)
-                prediction = int(model.predict(window_array)[0][0])
+                #prediction = int(model.predict(window_array)[0][0])
+                prediction = pred.eval(feed_dict={x: window_array})
                 #e = e + 1
                 if prediction == 1:
                     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

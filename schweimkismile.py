@@ -92,7 +92,7 @@ model.compile(
 model.fit(
   train_ds,
   validation_data=val_ds,
-  epochs=1
+  epochs=10
 )
 
 list_ds = tf.data.Dataset.list_files(str(data_dir/'*/*'), shuffle=False)
