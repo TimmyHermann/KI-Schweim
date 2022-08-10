@@ -1,11 +1,8 @@
 import tkinter
-
 import numpy as np
 import tensorflow as tf
 import cv2
 import imutils
-import pathlib
-
 from PIL import Image
 
 batch_size = 64
@@ -13,7 +10,7 @@ img_height = 108
 img_width = 129
 (winW, winH) = (129, 108)
 
-model = tf.keras.models.load_model('saved_model/my_model')
+model = tf.keras.models.load_model('saved_model/my_model3')
 Probability_model = tf.keras.Sequential([model, tf.keras.layers.Softmax()])
 
 i = 0
@@ -57,11 +54,11 @@ while (True):
     img_array = np.expand_dims(img_array, axis=0)
 
 
-    if i > 25:
+    if i > 200:
         # loop over the image pyramid
         for resized in pyramid(frame, scale=1.5):
             # loop over the sliding window for each layer of the pyramid
-            for (x, y, window) in sliding_window(resized, stepSize=30, windowSize=(winW, winH)):
+            for (x, y, window) in sliding_window(resized, stepSize=50, windowSize=(winW, winH)):
                 # if the window does not meet our desired window size, ignore it
                 if window.shape[0] != winH or window.shape[1] != winW:
                     continue
@@ -71,8 +68,7 @@ while (True):
                 window_array = np.array(wind)
                 window_array = np.expand_dims(window_array, axis=0)
                 print(window_array.shape)
-                #prediction = int(model.predict(window_array)[0][0])
-                prediction = pred.eval(feed_dict={x: window_array})
+                prediction = int(model.predict(window_array)[0][0])
                 #e = e + 1
                 if prediction == 1:
                     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
