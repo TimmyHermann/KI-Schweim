@@ -18,16 +18,16 @@ class UserInterface:
     def _setup_main_window(self):
         # WINDOW 
         # Title
-        self.window.title("ExpressionRecognizer")
+        self.window.title("Macrohard Memes")
         # For fixed window size 
-        self.window.resizable(width=False,height=False)
+        self.window.resizable(width=True,height=True)
         # Configuration for width, height and background color
         self.window.configure(width=470, height=550, bg=BG_COLOR)
 
 
         #LAYOUT
         #headLabel
-        head_label = Label(self.window, bg=BG_COLOR, fg=TEXT_COLOR, text="Expression to Emoji", font=FONT, pady=10)
+        head_label = Label(self.window, bg=BG_COLOR, fg=TEXT_COLOR, text="Macrohard Memes Meeting", font=FONT, pady=10)
         # Label position (label complete window width, thats why 1) 
         head_label.place(relwidth=1)
         
@@ -69,8 +69,9 @@ class UserInterface:
             return
         self.msg_entry.delete(0,END)
         msg1 = f"{msg}"
-        self.text_widget.insert(END,msg1) 
         self.text_widget.configure(state=NORMAL)
+        self.text_widget.insert(END,msg1) 
+        
         
 
 if __name__ == "__main__":
