@@ -1,12 +1,16 @@
 # Here a object oriented approach will be used because we need the 
 # tkinter components and also functions for these components
 
-import numpy as np
 # Import everything from tkinter
 from tkinter import *
 
+# Stuff for the camera
+import numpy as np
 from PIL import Image, ImageTk
 import cv2
+
+# Threading
+import threading
 
 # Colors
 BG_COLOR = "#283149"
@@ -23,7 +27,8 @@ class MeetingUi:
     # Initiating tkinter
     def __init__(self):
         self.window = Tk()
-        self._setup_window()
+        threading.Thread(target=self._setup_window()).start()
+        #self._setup_window()
         
     # UI runs till it is closed 
     def run (self):
@@ -62,7 +67,8 @@ class MeetingUi:
 
         # Capture from camera
         self.cap = cv2.VideoCapture(0)
-        self.video_stream()
+        # Threading for the camera
+        threading.Thread(target=self.video_stream()).start()
     # function for video streaming
     def video_stream(self):
         _,frame= self.cap.read()
