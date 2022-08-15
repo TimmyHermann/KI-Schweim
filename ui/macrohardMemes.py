@@ -39,7 +39,7 @@ class MeetingUi:
         # Basid settings for the window
         self.window.title("Macrohard Memes")
         self.window.resizable(width=False, height=False)
-        self.window.configure(width=900, height=800, bg=BG_COLOR)
+        self.window.configure(width=600, height=550, bg=BG_COLOR)
 
         # Head label
         head_Label = Label(self.window, bg=BG_LABEL_COLOR, fg=TEXT_COLOR, text="Macrohard Memes Meeting", font=FONT, pady=10)
@@ -62,7 +62,7 @@ class MeetingUi:
         send_button = Button(self.window, text="Senden", fg=TEXT_COLOR, font=FONT, width=20, bg=BG_COLOR)
         send_button.place(relx=0.88,rely=0.9, relheight=0.08, relwidth=0.1)
 
-        self.cam = Label(self.window)
+        self.cam = Label(self.window, bg=BG_COLOR)
         self.cam.place(relwidth=0.525, relheight=0.9, rely=0.08, relx=0.03)
 
         # Capture from camera
