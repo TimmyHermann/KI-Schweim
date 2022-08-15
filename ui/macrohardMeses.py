@@ -1,6 +1,8 @@
 # Here a object oriented approach will be used because we need the 
 # tkinter components and also functions for these components
 
+from msilib.schema import Class
+import numpy as np
 # Import everything from tkinter
 from tkinter import *
 
@@ -23,7 +25,7 @@ class MeetingUi:
     def __init__(self):
         self.window = Tk()
         self._setup_window()
-
+        
     # UI runs till it is closed 
     def run (self):
         self.window.mainloop()
@@ -46,15 +48,34 @@ class MeetingUi:
         self.chat_history.place(relwidth=0.4, relheight=0.8, rely=0.08, relx=0.58)
         self.chat_history.configure(cursor="arrow", state=DISABLED)
 
-        #message entry
+        # Message entry
         self.msg_entry = Entry(self.window, bg=BG_WRITE_COLOR, fg=TEXT_COLOR, font=FONT)
         self.msg_entry.place(relwidth=0.3, relheight=0.08, rely=0.9, relx=0.58)
         self.msg_entry.focus()
         self.msg_entry.bind("<Return>", self._on_enter)
 
-        #send button
+        # Send button
         send_button = Button(self.window, text="Senden", fg=TEXT_COLOR, font=FONT, width=20, bg=BG_COLOR)
         send_button.place(relx=0.88,rely=0.9, relheight=0.08, relwidth=0.1)
+
+        self.cam = Label(self.window)
+        self.cam.place(relwidth=0.525, relheight=0.9, rely=0.08, relx=0.03)
+
+    # Capture from camera
+    cap = cv2.VideoCapture(0)
+
+        # function for video streaming
+    def video_stream(self, cap):
+        _, frame = cap.read()
+        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+        img = Image.fromarray(cv2image)
+        imgtk = ImageTk.PhotoImage(image=img)
+        self.cam.imgtk = imgtk
+        self.cam.configure(image=imgtk)
+        self.cam.after(1, self.video_stream) 
+
+
+
 
 
     def _on_enter(self, event):
@@ -71,6 +92,9 @@ class MeetingUi:
         self.chat_history.insert(END,msg1) 
         # Disable writing again for the chat history 
         self.chat_history.configure(state=DISABLED)
+
+
+
 
 
     # https://stackoverflow.com/questions/52583911/create-a-gui-that-can-turn-on-off-camera-images-using-python-3-and-tkinter
@@ -93,3 +117,4 @@ class MeetingUi:
 if __name__== "__main__":
     MH_Memes = MeetingUi()
     MH_Memes.run()
+
