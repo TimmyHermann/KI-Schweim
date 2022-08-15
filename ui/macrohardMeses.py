@@ -1,7 +1,6 @@
 # Here a object oriented approach will be used because we need the 
 # tkinter components and also functions for these components
 
-from msilib.schema import Class
 import numpy as np
 # Import everything from tkinter
 from tkinter import *
@@ -61,22 +60,37 @@ class MeetingUi:
         self.cam = Label(self.window)
         self.cam.place(relwidth=0.525, relheight=0.9, rely=0.08, relx=0.03)
 
-    # Capture from camera
-    cap = cv2.VideoCapture(0)
-
-        # function for video streaming
-    def video_stream(self, cap):
-        _, frame = cap.read()
-        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-        img = Image.fromarray(cv2image)
-        imgtk = ImageTk.PhotoImage(image=img)
-        self.cam.imgtk = imgtk
-        self.cam.configure(image=imgtk)
-        self.cam.after(1, self.video_stream) 
-
-
+        # Capture from camera
+        self.cap = cv2.VideoCapture(0)
+        self.video_stream()
+    # function for video streaming
+    def video_stream(self):
+        _,frame= self.cap.read()
+        frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+        frame = Image.fromarray(frame)
+        frame = ImageTk.PhotoImage(frame)
+        self.cam.configure(image=frame)
+        self.cam.image=frame
+        self.cam.after(1,self.video_stream)
 
 
+
+        # while (True):
+        #     ret, frame = cap.read()
+        #     i = i + 1
+        #     im = Image.fromarray(frame, 'RGB')
+        #     im = im.resize((400,400))
+        #     img_array = np.array(im)
+        #     img_array = np.expand_dims(img_array, axis=0)
+        #     cv2.imshow("Capturing", frame)
+
+        # cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+        # cv2.imshow('frame', frame)
+        # img = Image.fromarray(cv2image)
+        # imgtk = ImageTk.PhotoImage(image=img)
+        # self.cam.imgtk = imgtk
+        # self.cam.configure(image=imgtk)
+        # self.cam.after(1, self.video_stream) 
 
     def _on_enter(self, event):
         msg = self.msg_entry.get()
