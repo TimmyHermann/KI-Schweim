@@ -8,6 +8,9 @@ from tkinter import *
 import numpy as np
 from PIL import Image, ImageTk
 import cv2
+import tensorflow as tf
+import emoji
+
 
 # Threading
 import threading
@@ -22,7 +25,16 @@ TEXT_COLOR = "#DBEDF3"
 # Fonts
 FONT = "ARIAL 12"
 
+# load Model
+model = tf.keras.models.load_model('../saved_model/my_model5')
+
 class MeetingUi:
+    # Vars
+    img_height = 108
+    img_width = 129
+    predi = np.array([0, 0])
+    l = 0
+    blocked = False
 
     # Initiating tkinter
     def __init__(self):
@@ -39,7 +51,7 @@ class MeetingUi:
         # Basid settings for the window
         self.window.title("Macrohard Memes")
         self.window.resizable(width=False, height=False)
-        self.window.configure(width=600, height=550, bg=BG_COLOR)
+        self.window.configure(width=1000, height=550, bg=BG_COLOR)
 
         # Head label
         head_Label = Label(self.window, bg=BG_LABEL_COLOR, fg=TEXT_COLOR, text="Macrohard Memes Meeting", font=FONT, pady=10)
@@ -71,15 +83,36 @@ class MeetingUi:
         threading.Thread(target=self.video_stream()).start()
     # function for video streaming
     def video_stream(self):
+
         _,frame= self.cap.read()
         frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
         frame = Image.fromarray(frame)
+        self.frame_check_KI(frame)
         frame = ImageTk.PhotoImage(frame)
         self.cam.configure(image=frame)
         self.cam.image=frame
         self.cam.after(1,self.video_stream)
 
+    def frame_check_KI(self,frame):
+        im = frame.resize((self.img_width, self.img_height))
+        img_array = np.array(im)
+        img_array = np.expand_dims(img_array, axis=0)
 
+        prediction = model.predict(img_array, batch_size=None, verbose=0)
+
+        if np.argmax(prediction, axis=1) == 0:
+            self.blocked = False
+
+        if self.l == 10:
+            if not self.blocked:
+                self.predi = np.append(self.predi, np.argmax(prediction, axis=1))
+                if sum(self.predi[-3:]) == 3:
+                    print("Thumbs Up")
+                    self.post_Thumbs_Up()
+                    self.blocked = True
+                self.predi = self.predi[-6:]
+            self.l = 0
+        self.l = self.l + 1
 
         # while (True):
         #     ret, frame = cap.read()
@@ -113,8 +146,9 @@ class MeetingUi:
         # Disable writing again for the chat history 
         self.chat_history.configure(state=DISABLED)
 
-
-
+    def post_Thumbs_Up(self):
+        self.msg_entry.insert(0, emoji.emojize(':thumbs_up:'))
+        self._on_enter(None)
 
 
     # https://stackoverflow.com/questions/52583911/create-a-gui-that-can-turn-on-off-camera-images-using-python-3-and-tkinter
