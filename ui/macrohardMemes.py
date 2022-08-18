@@ -142,12 +142,12 @@ class MeetingUi:
         msg1 = f"{msg}"
         # Enable writing for the chat history 
         self.chat_history.configure(state=NORMAL)
-        self.chat_history.insert(END,msg1) 
+        self.chat_history.insert(END,msg1+'\n') 
         # Disable writing again for the chat history 
         self.chat_history.configure(state=DISABLED)
 
     def post_Thumbs_Up(self):
-        self.msg_entry.insert(0, emoji.emojize(':thumbs_up:'))
+        self.msg_entry.insert(0, emoji.emojize(':thumbs_up:')+'\n')
         self._on_enter(None)
 
 
