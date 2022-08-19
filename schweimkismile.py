@@ -92,13 +92,14 @@ model.compile(
 model.fit(
   train_ds,
   validation_data=val_ds,
-  epochs=10
+  epochs=15
 )
 
 list_ds = tf.data.Dataset.list_files(str(data_dir/'*/*'), shuffle=False)
 list_ds = list_ds.shuffle(image_count, reshuffle_each_iteration=False)
 
 for f in list_ds.take(5):
+
   print(f.numpy())
 
 class_names = np.array(sorted([item.name for item in data_dir.glob('*') if item.name != "LICENSE.txt"]))
@@ -156,12 +157,6 @@ for i in range(9):
   plt.title(class_names[label])
   plt.axis("off")
 
-model.fit(
-  train_ds,
-  validation_data=val_ds,
-  epochs=20
-)
 
 
-
-model.save('saved_model/my_model5')
+model.save('models/modelTUS')

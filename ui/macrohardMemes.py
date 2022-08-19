@@ -26,7 +26,7 @@ TEXT_COLOR = "#DBEDF3"
 FONT = "ARIAL 12"
 
 # load Model
-model = tf.keras.models.load_model('../saved_model/my_model5')
+model = tf.keras.models.load_model('../models/modelTUS')
 
 class MeetingUi:
     # Vars
@@ -34,6 +34,7 @@ class MeetingUi:
     img_width = 129
     predi = np.array([0, 0])
     l = 0
+    cnt = 1
     blocked = False
 
     # Initiating tkinter
@@ -107,7 +108,8 @@ class MeetingUi:
             if not self.blocked:
                 self.predi = np.append(self.predi, np.argmax(prediction, axis=1))
                 if sum(self.predi[-3:]) == 3:
-                    print("Thumbs Up")
+                    print("Thumbs Up Nr: " + str(self.cnt))
+                    self.cnt = self.cnt + 1
                     self.post_Thumbs_Up()
                     self.blocked = True
                 self.predi = self.predi[-6:]
