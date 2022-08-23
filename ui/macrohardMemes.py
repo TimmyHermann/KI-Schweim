@@ -30,8 +30,8 @@ model = tf.keras.models.load_model('../models/modelTUS')
 
 class MeetingUi:
     # Vars
-    img_height = 108
-    img_width = 129
+    img_height = 105
+    img_width = 186
     predi = np.array([0, 0])
     l = 0
     cnt = 1
@@ -100,7 +100,9 @@ class MeetingUi:
         img_array = np.expand_dims(img_array, axis=0)
 
         prediction = model.predict(img_array, batch_size=None, verbose=0)
+        print(prediction)
 
+        #ToDo ggf. mehr als 50%
         if np.argmax(prediction, axis=1) == 0:
             self.blocked = False
 
@@ -115,6 +117,8 @@ class MeetingUi:
                 self.predi = self.predi[-6:]
             self.l = 0
         self.l = self.l + 1
+
+        # F-Score
 
         # while (True):
         #     ret, frame = cap.read()
