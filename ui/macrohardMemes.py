@@ -1,16 +1,23 @@
 # Here a object oriented approach will be used because we need the 
 # tkinter components and also functions for these components
+#
+# The UI is inspired by this tutorial: https://www.youtube.com/watch?v=sopNW98CRag&t=1747s
+# The implementation of the video stream is inspired by this tutorial: https://www.youtube.com/watch?v=cONDuZeYdzc
+
 
 # Import everything from tkinter
 from tkinter import *
 
-# Stuff for the camera
+# Libraries for the camera
 import numpy as np
 from PIL import Image, ImageTk
 import cv2
-import tensorflow as tf
-import emoji
 
+# Library for the AI
+import tensorflow as tf
+
+# Emojis
+import emoji
 
 # Threading
 import threading
@@ -41,14 +48,14 @@ class MeetingUi:
     def __init__(self):
         self.window = Tk()
         threading.Thread(target=self._setup_window()).start()
-        #self._setup_window()
         
-    # UI runs till it is closed 
+    # UI must run till it is closed 
     def run (self):
         self.window.mainloop()
 
-    # This is the function with all the components
+    # This is the function with all the UI components
     def _setup_window(self):
+
         # Basid settings for the window
         self.window.title("Macrohard Memes")
         self.window.resizable(width=False, height=False)
@@ -75,6 +82,7 @@ class MeetingUi:
         send_button = Button(self.window, text="Senden", fg=TEXT_COLOR, font=FONT, width=20, bg=BG_COLOR)
         send_button.place(relx=0.88,rely=0.9, relheight=0.08, relwidth=0.1)
 
+        # Camera
         self.cam = Label(self.window, bg=BG_COLOR)
         self.cam.place(relwidth=0.525, relheight=0.9, rely=0.08, relx=0.03)
 
@@ -82,7 +90,8 @@ class MeetingUi:
         self.cap = cv2.VideoCapture(0)
         # Threading for the camera
         threading.Thread(target=self.video_stream()).start()
-    # function for video streaming
+
+    # Function for video streaming
     def video_stream(self):
 
         _,frame= self.cap.read()
@@ -120,23 +129,6 @@ class MeetingUi:
 
         # F-Score
 
-        # while (True):
-        #     ret, frame = cap.read()
-        #     i = i + 1
-        #     im = Image.fromarray(frame, 'RGB')
-        #     im = im.resize((400,400))
-        #     img_array = np.array(im)
-        #     img_array = np.expand_dims(img_array, axis=0)
-        #     cv2.imshow("Capturing", frame)
-
-        # cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-        # cv2.imshow('frame', frame)
-        # img = Image.fromarray(cv2image)
-        # imgtk = ImageTk.PhotoImage(image=img)
-        # self.cam.imgtk = imgtk
-        # self.cam.configure(image=imgtk)
-        # self.cam.after(1, self.video_stream) 
-
     def _on_enter(self, event):
         msg = self.msg_entry.get()
         self._insert_message(msg)
@@ -156,24 +148,7 @@ class MeetingUi:
         self.msg_entry.insert(0, emoji.emojize(':thumbs_up:')+'\n')
         self._on_enter(None)
 
-
-    # https://stackoverflow.com/questions/52583911/create-a-gui-that-can-turn-on-off-camera-images-using-python-3-and-tkinter
-    # def capture_image():
-    #     vid = cv2.VideoCapture(0)
-    #     vid.set(cv2.CAP_PROP_FRAME_WIDTH, 800)
-    #     vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
-
-    #     while True:
-    #         ret, frame = vid.read()
-    #         i = i + 1
-    #         im = Image.fromarray(frame, 'RGB')
-    #         #im = im.resize((img_width,img_height))
-    #         img_array = np.array(im)
-    #         img_array = np.expand_dims(img_array, axis=0)
-
-
-
-# ???   
+# Main function 
 if __name__== "__main__":
     MH_Memes = MeetingUi()
     MH_Memes.run()
