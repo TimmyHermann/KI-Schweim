@@ -128,7 +128,6 @@ class MeetingUi:
         self.l = self.l + 1
 
         # F-Score
-
     def _on_enter(self, event):
         msg = self.msg_entry.get()
         self._insert_message(msg)
