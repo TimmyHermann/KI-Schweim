@@ -103,18 +103,20 @@ class MeetingUi:
         self.cam.image=frame
         self.cam.after(1,self.video_stream)
 
+    # validate the video
     def frame_check_KI(self,frame):
+        # resize images
         im = frame.resize((self.img_width, self.img_height))
         img_array = np.array(im)
         img_array = np.expand_dims(img_array, axis=0)
 
+        # predict Image
         prediction = model.predict(img_array, batch_size=None, verbose=0)
-        print(prediction)
+        #print(prediction)
 
-        #ToDo ggf. mehr als 50%
+        # print ThumbsUp logic
         if np.argmax(prediction, axis=1) == 0:
             self.blocked = False
-
         if self.l == 10:
             if not self.blocked:
                 self.predi = np.append(self.predi, np.argmax(prediction, axis=1))
@@ -127,7 +129,6 @@ class MeetingUi:
             self.l = 0
         self.l = self.l + 1
 
-        # F-Score
     def _on_enter(self, event):
         msg = self.msg_entry.get()
         self._insert_message(msg)
