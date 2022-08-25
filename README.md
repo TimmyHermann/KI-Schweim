@@ -1,6 +1,11 @@
-# KI-Schweim
+# KI Projekt (Schweim)
 
-KI analyse Webcam + returns values/probabilities for thumsUp
-1. Build the KI in schweimkismile.py
-2. Store the Model in saved Models
-3. Run AnalyseCam.py
+Benötigte Python Bibliotheken installieren: <br>
+`pip install numpy` <br>
+`pip install pillow` <br>
+`pip install cv2` <br>
+`pip install tensorflow`<br>
+`pip install emoji`<br>
+
+Zu starten der Anwendung in den ui Ordner wechseln den Befehl <br>
+`python macrohardMemes.py`
