@@ -7,5 +7,5 @@ Benötigte Python Bibliotheken installieren: <br>
 `pip install tensorflow`<br>
 `pip install emoji`<br>
 
-Zu starten der Anwendung in den ui Ordner wechseln den Befehl <br>
+Zu starten der Anwendung in den ui Ordner wechseln diesen Befehl ausführen<br>
 `python macrohardMemes.py`
