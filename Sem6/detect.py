@@ -1,3 +1,8 @@
+# This is a modified Version of the detect.py provided by the Yolov7 authors. Link to the repo: https://github.com/WongKinYiu/yolov7
+#
+# The UI is inspired by this tutorial: https://www.youtube.com/watch?v=sopNW98CRag&t=1747s
+# The implementation of the video stream is inspired by this tutorial: https://www.youtube.com/watch?v=cONDuZeYdzc
+
 # Imports for Yolov7
 import argparse
 import os
