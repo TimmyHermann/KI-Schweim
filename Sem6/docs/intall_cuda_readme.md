@@ -2,7 +2,7 @@
 You must install CUDA to use our YOLO v7 custom model. It is necessary because only if the model run with a GPU it will run smooth. This guide assumes that you have Python 3 and pip installed. <br>
 To install everything please follow the following steps:<br>
 1. **Install Visual Studio** <br>
-First you must install Visual Studio (Yes Visual Studio NOT Visual Studio Code). It is necessary because CUDA will grumble if it is not installed. Install die latest Community Version of Visual Studio (current Version 2022). To download Visual Studio click this [link](https://visualstudio.microsoft.com/de/downloads/) or search for it manually.<br>
+First you must install Visual Studio (Yes Visual Studio NOT Visual Studio Code). It is necessary because CUDA will grumble if it is not installed. Install die latest Community Version of Visual Studio (current Version 2022). Later you don´t have to use Visual Studio. You just need to install it, because of some dependencies somehow. To download Visual Studio click this [link](https://visualstudio.microsoft.com/de/downloads/) or search for it manually.<br>
 Follow the instructions and install just the core. The core without extra packages will be enough. If you install more it should be also ok. <br>
 <br>
 
