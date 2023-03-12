@@ -110,7 +110,7 @@ class detectP:
     def _setup_window(self):
 
         # Basid settings for the window
-        self.window.title("Macrohard Memes")
+        self.window.title("Macrohard Memes v2")
         self.window.resizable(width=False, height=False)
         self.window.configure(width=1000, height=550, bg=BG_COLOR)
 
