@@ -21,12 +21,11 @@ Um die richtigen PyTorch Versionen zu installieren diesen Befehl ausführen. Wen
 
 4. **Verifizierung der Installation** <br>
 Das sollte das Ergebnis sein:<br>
-With `pip list` you should get the result: <br>
+Hierfür `pip list`: <br>
 torch                        1.13.1+cu117 <br>
-torchaudio                   0.13.1+cu117 <br>
 torchvision                  0.14.1+cu117 <br>
 <br>
 <br>
-Das im ./docs Ordner bereitgestellt test_gpu.py kann zur Verifizierung verwendet werden, ob die GPU erkannt wird. 
+Das im ./docs Ordner bereitgestellte test_gpu.py Skript kann zur Verifizierung verwendet werden, ob die GPU erkannt wird. 
 
 
