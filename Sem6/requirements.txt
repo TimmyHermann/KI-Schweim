@@ -37,3 +37,10 @@ thop  # FLOPs computation
 # albumentations>=1.0.3
 # pycocotools>=2.0  # COCO mAP
 # roboflow
+
+#UI
+# Imports for the UI
+tkinter
+numpy 
+cv2
+emoji
