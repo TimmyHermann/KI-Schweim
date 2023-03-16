@@ -5,7 +5,7 @@ Alles für das KI-Projekt im 6. Semester ist im Ordner "Sem6" zu finden.
 
 ## Setup Guide
 1. **Benötigte Versionen von CUDA und PyTorch installieren (optional, aber empfohlen)**<br>
-[CUDA Installationsguide](./docs/intall_cuda_readme.md)
+[CUDA Installationsguide](./Sem6/docs/intall_cuda_readme.md)
 2. **Benötigte Bibliotheken installieren**<br>
 `pip install -r requirements.txt` 
 3. **Starten**
