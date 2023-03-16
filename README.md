@@ -13,5 +13,6 @@ Alles für das KI-Projekt im 6. Semester ist im Ordner "Sem6" zu finden.
 detect.py ist standardmäßig auf gpu (0) eingestellt. Wenn keine GPU vorhanden ist oder CUDA nicht funktioniert bitte auf 'cpu' in der detect.py ändern. 
 
 ## Quellen
-- Model: [Yolo v7](https://github.com/WongKinYiu/yolov7)
-- Model dependencies: [Yolo v7](https://github.com/WongKinYiu/yolov7)
+- Base Model fürs Trainieren: [Yolo v7](https://github.com/WongKinYiu/yolov7)  
+- Model dependencies (Ordner: utils, models): [Yolo v7](https://github.com/WongKinYiu/yolov7)
+- Dateien/Skripte: test.py, detect.py, .gitignore, requirements.txt: [Yolo v7](https://github.com/WongKinYiu/yolov7)

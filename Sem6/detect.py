@@ -49,8 +49,8 @@ class detectP:
 
     # Arguments fpr the model
     # source "0" is webcam, device either 'cpu' or '0' for gpu
-    source, weights, imgs, trace, device, cthres, ithres, augment, save_conf, project, name, save_txt = '0', 'best.pt', 640, True, str(
-        '0'), 0.70, 0.65, True, False, 'runs/detect', 'exp', False
+    source, weights, imgs, trace, device, cthres, ithres, augment, save_conf, project, name, save_txt = '0', 'all_gestures.pt', 640, True, str(
+        '0'), 0.60, 0.65, True, False, 'runs/detect', 'exp', False
     webcam = source.isnumeric()
 
     # Directories
@@ -70,6 +70,7 @@ class detectP:
     if trace:
         model = TracedModel(model, device, imgs)
 
+    # half is only relevant when a GPU is used
     if half:
         model.half()  # to FP16
 
@@ -98,6 +99,7 @@ class detectP:
     cnt = 1
     blocked = False
 
+    # Init of the tkinter for the GUI
     def __init__(self):
         self.window = Tk()
         threading.Thread(target=self._setup_window()).start()
@@ -146,6 +148,7 @@ class detectP:
         # Threading for the camera
         self.detect()
 
+    # Gesture detection
     def detect(self):
 
         self.dataset.__iter__()
