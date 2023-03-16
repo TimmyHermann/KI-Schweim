@@ -50,7 +50,7 @@ class detectP:
     # Arguments fpr the model
     # source "0" is webcam, device either 'cpu' or '0' for gpu
     source, weights, imgs, trace, device, cthres, ithres, augment, save_conf, project, name, save_txt = '0', 'all_gestures.pt', 640, True, str(
-        '0'), 0.60, 0.65, True, False, 'runs/detect', 'exp', False
+        'cpu'), 0.60, 0.65, True, False, 'runs/detect', 'exp', False
     webcam = source.isnumeric()
 
     # Directories

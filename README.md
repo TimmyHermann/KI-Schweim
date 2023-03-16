@@ -10,7 +10,7 @@ Alles für das KI-Projekt im 6. Semester ist im Ordner "Sem6" zu finden.
 `pip install -r requirements.txt` 
 3. **Starten**
 `python detect.py`
-detect.py ist standardmäßig auf gpu (0) eingestellt. Wenn keine GPU vorhanden ist oder CUDA nicht funktioniert bitte auf 'cpu' in der detect.py ändern. 
+detect.py ist standardmäßig auf cpu eingestellt. Wenn eine GPU vorhanden ist und CUDA funktioniert bitte auf '0' in der detect.py ändern.
 
 ## Quellen
 - Base Model fürs Trainieren: [Yolo v7](https://github.com/WongKinYiu/yolov7)  
